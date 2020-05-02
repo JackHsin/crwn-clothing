@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { checkUserSession } from './redux/user/user.actions';
 
 import './App.css';
 
@@ -12,10 +13,10 @@ import CheckoutPage from './pages/checkout/checkout.component';
 
 import Header from './components/header/header.component';
 
-import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils';
-import { setCurrentUser } from './redux/user/user.actions'
+// import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils';
+// import { setCurrentUser } from './redux/user/user.actions'
 import { selectCurrentUser } from './redux/user/user.selectors';
-import { selectCollectionsForPreview } from './redux/shop/shop.selectors'
+// import { selectCollectionsForPreview } from './redux/shop/shop.selectors'
 
 const HatsPage = () => (
   <div>
@@ -28,29 +29,30 @@ class App extends React.Component {
   unsubscribeFromAuth = null
 
   componentDidMount() {
-    
+    const { checkUserSession } = this.props;
+    checkUserSession();
 
-    const {setCurrentUser, collectionsArray} = this.props;
+    // const {setCurrentUser, collectionsArray} = this.props;
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 
-        if (userAuth) {
-          const userRef = await createUserProfileDocument(userAuth);
+    //     if (userAuth) {
+    //       const userRef = await createUserProfileDocument(userAuth);
 
-          userRef.onSnapshot(snapShot => {
-            setCurrentUser({
-                id: snapShot.id,
-                ...snapShot.data()
-              });
-          });
-        }
-        else {
-          setCurrentUser(userAuth);
-        }
+    //       userRef.onSnapshot(snapShot => {
+    //         setCurrentUser({
+    //             id: snapShot.id,
+    //             ...snapShot.data()
+    //           });
+    //       });
+    //     }
+    //     else {
+    //       setCurrentUser(userAuth);
+    //     }
 
-        // To add Local Collections date into firesotre DB, only for first time.
-        // addCollectionAndDocuments('collections', collectionsArray.map( ({title, items}) => ({title, items})) );
-      });
+    //     // To add Local Collections date into firesotre DB, only for first time.
+    //     // addCollectionAndDocuments('collections', collectionsArray.map( ({title, items}) => ({title, items})) );
+    // });
   }
  
   componentWillUnmount() {
@@ -73,15 +75,12 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  collectionsArray: selectCollectionsForPreview
+  currentUser: selectCurrentUser
+  // collectionsArray: selectCollectionsForPreview
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  checkUserSession: () => dispatch(checkUserSession())
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
