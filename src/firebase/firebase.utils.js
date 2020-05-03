@@ -20,8 +20,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     const snapShot = await userRef.get()
 
-    const collectionRef = firestore.collection('users');
-    const collectionSnapshot = await collectionRef.get();
+    // const collectionRef = firestore.collection('users');
+    // const collectionSnapshot = await collectionRef.get();
     // console.log({collectionSnapshot});
 
     // console.log(userAuth);
