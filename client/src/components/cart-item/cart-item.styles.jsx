@@ -12,7 +12,7 @@ export const CartItemContainer = styled.div`
 `;
 
 export const CartItemImage = styled.img`
-  width: 30%;
+    width: 30%;
 `;
 
 export const ItemDetailsContainer = styled.div`

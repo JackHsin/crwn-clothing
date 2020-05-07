@@ -6,14 +6,14 @@ import { selectCollection } from '../../redux/shop/shop.selectors'
 import CollectionItem from '../../components/collection-item/collection-item.component';
 
 // import './collection.styles.scss'
-import { CollectionPageContainer, TitleContainer, ItemsContainer } from './collection.styles';
+import { CollectionPageContainer, TitleContainer, CollectionItemsContainer } from './collection.styles';
 
 const CollectionPage = ({ collection }) => {
     const { title, items } = collection;
     return (
         <CollectionPageContainer>
             <TitleContainer>{title}</TitleContainer>
-            <ItemsContainer>
+            <CollectionItemsContainer>
                 {
                     items.map(item => (
                             <CollectionItem key={item.id} item={item} />
@@ -21,7 +21,7 @@ const CollectionPage = ({ collection }) => {
                     )
                 }
 
-            </ItemsContainer>
+            </CollectionItemsContainer>
         </CollectionPageContainer>
     );
 };
