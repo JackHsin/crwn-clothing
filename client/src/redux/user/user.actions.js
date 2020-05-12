@@ -55,3 +55,8 @@ export const signUpFailure = (error) => ({
     type: UserActionTypes.SIGN_UP_FAILURE,
     payload: error
 });
+
+export const setManualSignInThisTime = (value) => ({
+    type: UserActionTypes.SET_MANUAL_SIGN_IN_THIS_TIME,
+    payload: value
+});

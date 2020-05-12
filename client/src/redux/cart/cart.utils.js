@@ -29,3 +29,26 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
         : cartItem
     )
 }
+console.log();
+export const combineNotSignInItemsWithFirebaseItems = (cartItems, firebaseItems) => {
+    let remainingfirebaseItems = firebaseItems;
+
+    let newCartItemsArray = cartItems.map(cartItem => {
+        let tempItem = cartItem;
+
+        firebaseItems.forEach( (firebaseItem, index) => {
+            if (cartItem.id === firebaseItem.id) {
+                remainingfirebaseItems.splice(index, 1);
+                tempItem = { ...cartItem, quantity: cartItem.quantity + firebaseItem.quantity };
+            }
+        });
+
+        return tempItem;
+    });
+
+    remainingfirebaseItems.forEach( item => {
+        newCartItemsArray.push(item);
+    })
+
+    return newCartItemsArray;
+}

@@ -2,6 +2,7 @@ import UserActionTypes from './user.types';
 
 const INITIAL_STATE = {
     currentUser: null,
+    isManualSignInThisTime: false,
     error: null
 }
 
@@ -26,9 +27,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case UserActionTypes.SIGN_UP_FAILURE:
             return {
                 ...state,
+                isManualSignInThisTime: false,
                 error: action.payload
             };
-
+        case UserActionTypes.SET_MANUAL_SIGN_IN_THIS_TIME:
+            return {
+                ...state,
+                isManualSignInThisTime: action.payload
+            }
         default:
             return state;
     }

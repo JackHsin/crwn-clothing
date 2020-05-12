@@ -2,8 +2,8 @@ import { all, call, takeLatest, put, select } from 'redux-saga/effects';
 
 import { getUserCartRef } from '../../firebase/firebase.utils';
 import UserActionTypes from '../user/user.types';
-import { selectCurrentUser } from '../user/user.selectors';
-import { clearCart, setCartFromFirebase } from './cart.actions';
+import { selectCurrentUser, selectIsManualSignInThisTime } from '../user/user.selectors';
+import { clearCart, setCartFromFirebase, CombineCartWithFirebase } from './cart.actions';
 import { selectCartItems } from './cart.selectors';
 import CartActionTypes from './cart.types';
 
@@ -23,7 +23,15 @@ export function* updateCartInFirebase() {
 export function* checkCartFromFirebase({ payload: user }) {
     const cartRef = yield getUserCartRef(user.id);
     const cartSnapshot = yield cartRef.get();
-    yield put(setCartFromFirebase(cartSnapshot.data().cartItems));
+    const isManualSignInThisTime = yield select(selectIsManualSignInThisTime);
+    const firebaseCartItems = yield cartSnapshot.data().cartItems;
+
+    if (isManualSignInThisTime) {
+        yield put(CombineCartWithFirebase(firebaseCartItems));
+    }
+    else {
+        yield put(setCartFromFirebase(firebaseCartItems));
+    }
 }
 
 export function* clearCartOnSignOut() {
@@ -43,7 +51,8 @@ export function* onCartChange() {
       [
         CartActionTypes.ADD_ITEM,
         CartActionTypes.REMOVE_ITEM,
-        CartActionTypes.CLEAR_ITEM_FROM_CART
+        CartActionTypes.CLEAR_ITEM_FROM_CART,
+        CartActionTypes.COMBINE_CART_WITH_FIREBASE
       ],
       updateCartInFirebase
     );

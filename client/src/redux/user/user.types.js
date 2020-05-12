@@ -11,7 +11,9 @@ export const UserActionTypes = {
 
     SIGN_UP_START: 'SIGN_UP_START',
     SIGN_UP_SUCCESS: 'SIGN_UP_SUCCESS',
-    SIGN_UP_FAILURE: 'SIGN_UP_FAILURE'
+    SIGN_UP_FAILURE: 'SIGN_UP_FAILURE',
+
+    SET_MANUAL_SIGN_IN_THIS_TIME: 'SET_MANUAL_SIGN_IN_THIS_TIME'
 };
 
 export default UserActionTypes;

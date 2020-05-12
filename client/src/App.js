@@ -10,17 +10,18 @@ import Header from './components/header/header.component';
 import Spinner from './components/spinner/spinner.component';
 import ErrorBoundary from './components/error-boundary/error-boundary.component';
 
-import { selectCurrentUser } from './redux/user/user.selectors';
+import { selectCurrentUser, selectIsManualSignInThisTime } from './redux/user/user.selectors';
 
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
 const ShopPage = lazy(() => import('./pages/shop/shop.component'));
 const SignInAndSignUpPage = lazy(() => import('./pages/sign-in-and-sign-up/sign-in-and-sign-up.component'));
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
 
-const App = ({ checkUserSession, currentUser }) => {
+const App = ({ checkUserSession, currentUser, isManualSignInThisTime }) => {
 
   useEffect(() => {
     checkUserSession();
+    console.log('App isManualSignInThisTime', isManualSignInThisTime);
   }, [checkUserSession])
 
   return (
@@ -43,7 +44,8 @@ const App = ({ checkUserSession, currentUser }) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  isManualSignInThisTime: selectIsManualSignInThisTime
   // collectionsArray: selectCollectionsForPreview
 });
 
