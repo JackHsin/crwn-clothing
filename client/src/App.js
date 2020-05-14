@@ -21,7 +21,7 @@ const App = ({ checkUserSession, currentUser, isManualSignInThisTime }) => {
 
   useEffect(() => {
     checkUserSession();
-    console.log('App isManualSignInThisTime', isManualSignInThisTime);
+    // console.log('App isManualSignInThisTime', isManualSignInThisTime);
   }, [checkUserSession])
 
   return (
