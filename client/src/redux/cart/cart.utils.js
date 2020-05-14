@@ -29,7 +29,7 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
         : cartItem
     )
 }
-console.log();
+
 export const combineNotSignInItemsWithFirebaseItems = (cartItems, firebaseItems) => {
     let remainingfirebaseItems = firebaseItems;
 

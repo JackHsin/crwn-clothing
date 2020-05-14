@@ -23,6 +23,7 @@ export const CartDropdownContainer = styled.div`
 export const CartDropdownButton = styled(CustomButton)`
     margin-top: auto;
 `;
+CartDropdownButton.displayName = 'CartDropdownButton';
 
 export const CartItemsContainer = styled.div`
     height: 240px;
@@ -35,3 +36,4 @@ export const EmptyMessageSpan = styled.span`
     font-size: 18px;
     margin: 50px auto;
 `;
+EmptyMessageSpan.displayName = 'EmptyMessageSpan';

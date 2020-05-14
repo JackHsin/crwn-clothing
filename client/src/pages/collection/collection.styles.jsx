@@ -25,3 +25,4 @@ export const CollectionItemsContainer = styled.div`
         grid-gap: 15px;
     }
 `;
+CollectionItemsContainer.displayName = 'CollectionItemsContainer';

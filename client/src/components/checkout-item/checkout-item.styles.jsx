@@ -43,8 +43,10 @@ export const QuantityContainer = styled(TestContainer)`
         margin: 0 10px;
     }
 `;
+QuantityContainer.displayName = 'QuantityContainer';
 
 export const RemoveButtonContainer = styled.div`
     padding-left: 12px;
     cursor: pointer;
 `;
+RemoveButtonContainer.displayName = 'RemoveButtonContainer';

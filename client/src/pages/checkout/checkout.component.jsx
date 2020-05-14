@@ -10,7 +10,7 @@ import StripeCheckoutButton from '../../components/stripe-button/stripe-button.c
 // import './checkout.styles.scss';
 import { CheckoutPageContainer, CheckoutHeaderContainer, HeaderBlockContainer, TotalContainer, TestWarningContainer } from './checkout.styles';
 
-const CheckoutPage = ({cartItems, total}) => (
+export const CheckoutPage = ({cartItems, total}) => (
     <CheckoutPageContainer>
         <CheckoutHeaderContainer>
             <HeaderBlockContainer>

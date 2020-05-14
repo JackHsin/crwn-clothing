@@ -15,7 +15,7 @@ import './header.styles.scss';
 
 import { HeaderContainer, LogoContainer, OptionsContainer, OptionDiv, OptionLink} from './header.styled';
 
-const Header = ({ currentUser, hidden, signOutStart }) => (
+export const Header = ({ currentUser, hidden, signOutStart }) => (
     <HeaderContainer>
         <LogoContainer to ="/">
             <Logo className='logo' />
@@ -30,7 +30,7 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
             {
                 currentUser ?
                     (
-                    <OptionDiv onClick={signOutStart}>SIGN OUT</OptionDiv>
+                    <OptionLink as='div' onClick={signOutStart}>SIGN OUT</OptionLink>
                     )
                 :
                     (
